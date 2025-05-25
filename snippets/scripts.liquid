@@ -1,0 +1,14 @@
+<script type='importmap'>
+  {
+    "imports": {
+      "@theme/events": "{{ 'events.js' | asset_url }}",
+      "@theme/utilities": "{{ 'utilities.js' | asset_url }}"
+    }
+  }
+</script>
+
+<link rel='modulepreload' href='{{ 'theme.js' | asset_url }}'>
+<link rel='modulepreload' href='{{ 'utilities.js' | asset_url }}'>
+<link rel='modulepreload' href='{{ 'events.js' | asset_url }}'>
+
+<script src='{{ 'theme.js' | asset_url }}' type="module" defer></script>
