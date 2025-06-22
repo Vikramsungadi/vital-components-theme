@@ -10,11 +10,464 @@
 {
   "sections": {
     "main": {
-      "type": "hello-world",
+      "type": "hero",
+      "settings": {}
+    },
+    "hero_nY3nGy": {
+      "type": "hero",
+      "blocks": {
+        "carousel_pyaL7g": {
+          "type": "carousel",
+          "name": "Announcement bar",
+          "settings": {
+            "device": "common",
+            "desktop_aspect_ratio": "3/1",
+            "mobile_aspect_ratio": "2/3",
+            "slide_type": "loop",
+            "autoplay": true,
+            "autoplay_interval": 2,
+            "enable_play_controls": false,
+            "slide_per_page": 1,
+            "mobile_slide_per_page": 1,
+            "arrows": false,
+            "mobile_arrows": false,
+            "mobile_gap": 5,
+            "gap": 4,
+            "pagination": false,
+            "pagination_dots": false,
+            "pagination_width": 10,
+            "inactive_color": "",
+            "active_color": "",
+            "pagination_height": 10,
+            "radius": 5
+          },
+          "blocks": {
+            "carousel_item_PKkJTh": {
+              "type": "carousel-item",
+              "name": "Carousel Item",
+              "settings": {},
+              "blocks": {
+                "text_qMyybz": {
+                  "type": "text",
+                  "name": "t:general.text",
+                  "settings": {
+                    "device": "mobile",
+                    "text": "50% OFF ON ALL PERFUMES",
+                    "text_style": "text--normal",
+                    "text_style_mobile": "text--subtitle__mobile",
+                    "font_size": 16,
+                    "font_size_mobile": 16,
+                    "alignment": "center",
+                    "alignment_mobile": "center",
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_qMyybz"
+              ]
+            },
+            "carousel_item_dDjVjA": {
+              "type": "carousel-item",
+              "name": "Carousel Item",
+              "settings": {},
+              "blocks": {
+                "text_QtDcgr": {
+                  "type": "text",
+                  "name": "t:general.text",
+                  "settings": {
+                    "device": "mobile",
+                    "text": "30% OFF - CLEARANCE SALE",
+                    "text_style": "text--normal",
+                    "text_style_mobile": "text--normal__mobile",
+                    "font_size": 16,
+                    "font_size_mobile": 16,
+                    "alignment": "center",
+                    "alignment_mobile": "center",
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_QtDcgr"
+              ]
+            },
+            "carousel_item_bGRWRw": {
+              "type": "carousel-item",
+              "name": "Carousel Item",
+              "settings": {},
+              "blocks": {
+                "text_HmxHBH": {
+                  "type": "text",
+                  "name": "t:general.text",
+                  "settings": {
+                    "device": "mobile",
+                    "text": "BUY 1 GET 1 FREE",
+                    "text_style": "text--normal",
+                    "text_style_mobile": "text--subtitle__mobile",
+                    "font_size": 16,
+                    "font_size_mobile": 16,
+                    "alignment": "center",
+                    "alignment_mobile": "center",
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_HmxHBH"
+              ]
+            }
+          },
+          "block_order": [
+            "carousel_item_PKkJTh",
+            "carousel_item_dDjVjA",
+            "carousel_item_bGRWRw"
+          ]
+        },
+        "carousel_bwijiY": {
+          "type": "carousel",
+          "name": "Hero Section",
+          "settings": {
+            "device": "mobile",
+            "desktop_aspect_ratio": "16/9",
+            "mobile_aspect_ratio": "3/4",
+            "slide_type": "slide",
+            "autoplay": false,
+            "autoplay_interval": 3,
+            "enable_play_controls": false,
+            "slide_per_page": 1,
+            "mobile_slide_per_page": 1,
+            "arrows": true,
+            "mobile_arrows": false,
+            "mobile_gap": 5,
+            "gap": 4,
+            "pagination": true,
+            "pagination_dots": true,
+            "pagination_width": 10,
+            "inactive_color": "",
+            "active_color": "",
+            "pagination_height": 10,
+            "radius": 5
+          },
+          "blocks": {
+            "carousel_item_XtnkzJ": {
+              "type": "carousel-item",
+              "name": "Carousel Item",
+              "settings": {},
+              "blocks": {
+                "b_image_LXEB8D": {
+                  "type": "b-image",
+                  "settings": {
+                    "desktop_image": "shopify://shop_images/DESKTOP_BANNER_-_2.png",
+                    "mobile_image": "shopify://shop_images/MOBILE_BANNER_-_2.png",
+                    "fit": "cover"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "b_image_LXEB8D"
+              ]
+            },
+            "carousel_item_wjLG6h": {
+              "type": "carousel-item",
+              "name": "Carousel Item",
+              "settings": {},
+              "blocks": {
+                "b_image_PDgMkN": {
+                  "type": "b-image",
+                  "settings": {
+                    "desktop_image": "shopify://shop_images/Group_3.png",
+                    "mobile_image": "shopify://shop_images/Group_5.png",
+                    "fit": "cover"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "b_image_PDgMkN"
+              ]
+            },
+            "carousel_item_g3mfd7": {
+              "type": "carousel-item",
+              "name": "Carousel Item",
+              "settings": {},
+              "blocks": {
+                "b_image_R3xijc": {
+                  "type": "b-image",
+                  "settings": {
+                    "desktop_image": "shopify://shop_images/DESKTOP_BANNER_-_1.png",
+                    "mobile_image": "shopify://shop_images/MOBILE_BANNER_-_1.png",
+                    "fit": "cover"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "b_image_R3xijc"
+              ]
+            }
+          },
+          "block_order": [
+            "carousel_item_XtnkzJ",
+            "carousel_item_wjLG6h",
+            "carousel_item_g3mfd7"
+          ]
+        }
+      },
+      "block_order": [
+        "carousel_pyaL7g",
+        "carousel_bwijiY"
+      ],
+      "name": "Hero",
+      "settings": {}
+    },
+    "custom_section_XTD4p7": {
+      "type": "custom-section",
+      "blocks": {
+        "group_Gd9Lq9": {
+          "type": "group",
+          "name": "Collection Wrapper",
+          "settings": {
+            "layout_direction": "group--vertical",
+            "alignment": "center",
+            "padding": 20,
+            "gap": 20
+          },
+          "blocks": {
+            "text_DwWrBj": {
+              "type": "text",
+              "settings": {
+                "device": "mobile",
+                "text": "Explore Collections",
+                "text_style": "text--title",
+                "text_style_mobile": "text--title__mobile",
+                "font_size": 16,
+                "font_size_mobile": 16,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "carousel_MXmNP8": {
+              "type": "carousel",
+              "name": "Collection List Scroller",
+              "settings": {
+                "device": "mobile",
+                "desktop_aspect_ratio": "16/9",
+                "mobile_aspect_ratio": "3/4",
+                "slide_type": "slide",
+                "autoplay": false,
+                "autoplay_interval": 3,
+                "enable_play_controls": false,
+                "slide_per_page": 5,
+                "mobile_slide_per_page": 2,
+                "arrows": true,
+                "mobile_arrows": true,
+                "mobile_gap": 0,
+                "gap": 5,
+                "pagination": false,
+                "pagination_dots": true,
+                "pagination_width": 10,
+                "inactive_color": "",
+                "active_color": "",
+                "pagination_height": 10,
+                "radius": 5
+              },
+              "blocks": {
+                "carousel_item_NtBiYM": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_tc8NCX": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/men-collection-banner.png",
+                        "fit": "cover"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_tc8NCX"
+                  ]
+                },
+                "carousel_item_iCXQHh": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_zTeXVD": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/women-collection-banner.png",
+                        "fit": "cover"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_zTeXVD"
+                  ]
+                },
+                "carousel_item_rWqBmK": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_mfQ9rh": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/jeans-collection-banner.png",
+                        "fit": "cover"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_mfQ9rh"
+                  ]
+                },
+                "carousel_item_QyhJGF": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_XBKiMh": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/kids-collection-banner.png",
+                        "fit": "cover"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_XBKiMh"
+                  ]
+                },
+                "carousel_item_a8QKaA": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_EbDbfk": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/shoes-collection-banner.png",
+                        "fit": "cover"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_EbDbfk"
+                  ]
+                },
+                "carousel_item_eMMXGU": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_aQQjHG": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/sportswear-collection-banner.png",
+                        "fit": "cover"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_aQQjHG"
+                  ]
+                }
+              },
+              "block_order": [
+                "carousel_item_NtBiYM",
+                "carousel_item_iCXQHh",
+                "carousel_item_rWqBmK",
+                "carousel_item_QyhJGF",
+                "carousel_item_a8QKaA",
+                "carousel_item_eMMXGU"
+              ]
+            }
+          },
+          "block_order": [
+            "text_DwWrBj",
+            "carousel_MXmNP8"
+          ]
+        }
+      },
+      "block_order": [
+        "group_Gd9Lq9"
+      ],
+      "name": "Collection List",
+      "settings": {}
+    },
+    "custom_section_M8gD3i": {
+      "type": "custom-section",
+      "blocks": {
+        "grid_i6BiLY": {
+          "type": "grid",
+          "name": "Grid",
+          "settings": {
+            "device": "mobile",
+            "columns": 3,
+            "columns_mobile": 2
+          },
+          "blocks": {
+            "b_image_6fpqAE": {
+              "type": "b-image",
+              "name": "Image",
+              "settings": {
+                "desktop_image": "shopify://shop_images/shoes-collection-banner.png",
+                "fit": "cover"
+              },
+              "blocks": {}
+            },
+            "b_image_LNz4Yh": {
+              "type": "b-image",
+              "name": "Image",
+              "settings": {
+                "desktop_image": "shopify://shop_images/formal-wear-collection-banner.png",
+                "fit": "cover"
+              },
+              "blocks": {}
+            },
+            "b_image_qih49k": {
+              "type": "b-image",
+              "name": "Image",
+              "settings": {
+                "desktop_image": "shopify://shop_images/sportswear-collection-banner.png",
+                "fit": "cover"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "b_image_6fpqAE",
+            "b_image_LNz4Yh",
+            "b_image_qih49k"
+          ]
+        }
+      },
+      "block_order": [
+        "grid_i6BiLY"
+      ],
+      "name": "t:general.custom_section",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "hero_nY3nGy",
+    "custom_section_XTD4p7",
+    "custom_section_M8gD3i"
   ]
 }

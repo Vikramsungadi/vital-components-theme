@@ -1,0 +1,75 @@
+<style>
+  .shopify-block-{{ block.id }}{
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns }},1fr);
+  }
+
+  @media screen and (max-width:768px){
+  .shopify-block-{{ block.id }}{
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_mobile }},1fr);
+  }
+  }
+</style>
+
+<section class='shopify-block-{{ block.id }}' {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</section>
+
+{% schema %}
+  {
+    "name": "Grid",
+    "tag": null,
+    "settings": [
+      {
+        "type": "radio",
+        "id": "device",
+        "label": "Type",
+        "default": "common",
+        "options": [
+          {
+            "value": "common",
+            "label": "Common"
+          },
+          {
+            "value": "desktop",
+            "label": "Desktop"
+          },
+          {
+            "value": "mobile",
+            "label": "Mobile"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "columns",
+        "label": "Columns",
+        "default": 2,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "visible_if": "{{ block.settings.device == 'desktop' }}"
+      },
+      {
+        "type": "range",
+        "id": "columns_mobile",
+        "label": "Columns",
+        "default": 2,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "visible_if": "{{ block.settings.device == 'mobile' }}"
+      }
+    ],
+
+    "blocks": [{ "type": "@theme" }],
+    "presets": [
+      {
+        "name": "Grid",
+        "blocks": [{ "type": "@theme" }],
+        "category": "Layout"
+      }
+    ]
+  }
+{% endschema %}

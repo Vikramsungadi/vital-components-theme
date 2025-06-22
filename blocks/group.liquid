@@ -11,14 +11,16 @@
   {% content_for 'block', type: 'group', id: 'group' %}
 {% enddoc %}
 
+{% capture style %}
+  --padding: {{ block.settings.padding }}px;
+  --alignment: {{ block.settings.alignment }};
+  --gap: {{ block.settings.gap }}px;
+{% endcapture %}
+
 <div
-  class="group {{ block.settings.layout_direction }}"
-  style="
-    --padding: {{ block.settings.padding }}px;
-    --alignment: {{ block.settings.alignment }};
-  "
-  {{ block.shopify_attributes }}
->
+  class='group {{ block.settings.layout_direction }}'
+  style='{{ style }}'
+  {{ block.shopify_attributes }}>
   {% content_for 'blocks' %}
 </div>
 
@@ -28,6 +30,7 @@
     flex-wrap: nowrap;
     overflow: hidden;
     width: 100%;
+    gap: var(--gap);
   }
 
   .group--horizontal {
@@ -45,61 +48,71 @@
 {% endstylesheet %}
 
 {% schema %}
-{
-  "name": "t:general.group",
-  "blocks": [{ "type": "@theme" }],
-  "settings": [
-    {
-      "type": "select",
-      "id": "layout_direction",
-      "label": "t:labels.layout_direction",
-      "default": "group--vertical",
-      "options": [
-        { "value": "group--horizontal", "label": "t:options.direction.horizontal" },
-        { "value": "group--vertical", "label": "t:options.direction.vertical" }
-      ]
-    },
-    {
-      "visible_if": "{{ block.settings.layout_direction == 'group--vertical' }}",
-      "type": "select",
-      "id": "alignment",
-      "label": "t:labels.alignment",
-      "default": "flex-start",
-      "options": [
-        { "value": "flex-start", "label": "t:options.alignment.left" },
-        { "value": "center", "label": "t:options.alignment.center" },
-        { "value": "flex-end", "label": "t:options.alignment.right" }
-      ]
-    },
-    {
-      "type": "range",
-      "id": "padding",
-      "label": "t:labels.padding",
-      "default": 0,
-      "min": 0,
-      "max": 200,
-      "step": 2,
-      "unit": "px"
-    }
-  ],
-  "presets": [
-    {
-      "name": "t:general.column",
-      "category": "t:general.layout",
-      "settings": {
-        "layout_direction": "group--vertical",
-        "alignment": "flex-start",
-        "padding": 0
+  {
+    "name": "t:general.group",
+    "blocks": [{ "type": "@theme" }],
+    "settings": [
+      {
+        "type": "select",
+        "id": "layout_direction",
+        "label": "t:labels.layout_direction",
+        "default": "group--vertical",
+        "options": [
+          { "value": "group--horizontal", "label": "t:options.direction.horizontal" },
+          { "value": "group--vertical", "label": "t:options.direction.vertical" }
+        ]
+      },
+      {
+        "visible_if": "{{ block.settings.layout_direction == 'group--vertical' }}",
+        "type": "select",
+        "id": "alignment",
+        "label": "t:labels.alignment",
+        "default": "flex-start",
+        "options": [
+          { "value": "flex-start", "label": "t:options.alignment.left" },
+          { "value": "center", "label": "t:options.alignment.center" },
+          { "value": "flex-end", "label": "t:options.alignment.right" }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "padding",
+        "label": "t:labels.padding",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "gap",
+        "label": "Gap",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
       }
-    },
-    {
-      "name": "t:general.row",
-      "category": "t:general.layout",
-      "settings": {
-        "layout_direction": "group--horizontal",
-        "padding": 0
+    ],
+    "presets": [
+      {
+        "name": "t:general.column",
+        "category": "t:general.layout",
+        "settings": {
+          "layout_direction": "group--vertical",
+          "alignment": "flex-start",
+          "padding": 0
+        }
+      },
+      {
+        "name": "t:general.row",
+        "category": "t:general.layout",
+        "settings": {
+          "layout_direction": "group--horizontal",
+          "padding": 0
+        }
       }
-    }
-  ]
-}
+    ]
+  }
 {% endschema %}

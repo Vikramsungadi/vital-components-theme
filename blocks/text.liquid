@@ -5,17 +5,34 @@
   {% content_for 'block', type: 'text', id: 'text' %}
 {% enddoc %}
 
+{% capture style %}
+--text-background: {{ block.settings.color_scheme.settings.background }};
+--text-color: {{ block.settings.color_scheme.settings.foreground }};
+--text-align: {{ block.settings.alignment }};
+--text-align-mobile: {{ block.settings.alignment_mobile }};
+
+{% if block.settings.text_style == 'custom' %}
+  --text-size: {{ block.settings.font_size }}px;
+{% endif %}
+{% if block.settings.text_style_mobile == 'custom' %}
+  --text-size-mobile: {{ block.settings.font_size_mobile }}px;
+{% endif %}
+
+{% endcapture %}
+
 <div
-  class="text {{ block.settings.text_style }}"
-  style="--text-align: {{ block.settings.alignment }}"
-  {{ block.shopify_attributes }}
->
+  class='text {{ block.settings.text_style }} {{ block.settings.text_style_mobile }}'
+  style='{{ style }}'
+  {{ block.shopify_attributes }}>
   {{ block.settings.text }}
 </div>
 
 {% stylesheet %}
   .text {
     text-align: var(--text-align);
+    background-color: var(--text-background);
+    color: var(--text-color);
+    font-size: var(--text-size);
   }
   .text--title {
     font-size: 2rem;
@@ -24,36 +41,121 @@
   .text--subtitle {
     font-size: 1.5rem;
   }
+
+  @media screen and (max-width: 768px) {
+    .text {
+      text-align: var(--text-align-mobile);
+      font-size: var(--text-size-mobile);
+    }
+    .text--title__mobile {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .text--subtitle__mobile {
+      font-size: 1rem;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
-{
-  "name": "t:general.text",
-  "settings": [
-    {
-      "type": "text",
-      "id": "text",
-      "label": "t:labels.text",
-      "default": "Text"
-    },
-    {
-      "type": "select",
-      "id": "text_style",
-      "label": "t:labels.text_style",
-      "options": [
-        { "value": "text--title", "label": "t:options.text_style.title" },
-        { "value": "text--subtitle", "label": "t:options.text_style.subtitle" },
-        { "value": "text--normal", "label": "t:options.text_style.normal" }
-      ],
-      "default": "text--title"
-    },
-    {
-      "type": "text_alignment",
-      "id": "alignment",
-      "label": "t:labels.alignment",
-      "default": "left"
-    }
-  ],
-  "presets": [{ "name": "t:general.text" }]
-}
+  {
+    "name": "t:general.text",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "device",
+        "label": "Type",
+        "default": "common",
+        "options": [
+          {
+            "value": "common",
+            "label": "Common"
+          },
+          {
+            "value": "desktop",
+            "label": "Desktop"
+          },
+          {
+            "value": "mobile",
+            "label": "Mobile"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "t:labels.text",
+        "default": "Text"
+      },
+      {
+        "type": "select",
+        "id": "text_style",
+        "label": "t:labels.text_style",
+        "options": [
+          { "value": "text--title", "label": "t:options.text_style.title" },
+          { "value": "text--subtitle", "label": "t:options.text_style.subtitle" },
+          { "value": "text--normal", "label": "t:options.text_style.normal" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "text--title",
+        "visible_if": "{{ block.settings.device == 'desktop' }}"
+      },
+      {
+        "type": "select",
+        "id": "text_style_mobile",
+        "label": "t:labels.text_style",
+        "options": [
+          { "value": "text--title__mobile", "label": "t:options.text_style.title" },
+          { "value": "text--subtitle__mobile", "label": "t:options.text_style.subtitle" },
+          { "value": "text--normal__mobile", "label": "t:options.text_style.normal" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "text--title__mobile",
+        "visible_if": "{{ block.settings.device == 'mobile' }}"
+      },
+      {
+        "type": "range",
+        "id": "font_size",
+        "min": 6,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Size",
+        "default": 16,
+        "visible_if": "{{ block.settings.text_style == 'custom' and block.settings.device == 'desktop' }}"
+      },
+      {
+        "type": "range",
+        "id": "font_size_mobile",
+        "min": 6,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Size",
+        "default": 16,
+        "visible_if": "{{ block.settings.text_style == 'custom' and block.settings.device == 'mobile' }}"
+      },
+      {
+        "type": "text_alignment",
+        "id": "alignment",
+        "label": "t:labels.alignment",
+        "default": "left",
+        "visible_if": "{{ block.settings.device == 'desktop' }}"
+      },
+      {
+        "type": "text_alignment",
+        "id": "alignment_mobile",
+        "label": "t:labels.alignment",
+        "default": "left",
+        "visible_if": "{{ block.settings.device == 'mobile' }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color scheme"
+      }
+    ],
+    "presets": [{ "name": "t:general.text" }]
+  }
 {% endschema %}

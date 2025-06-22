@@ -1,0 +1,49 @@
+{% doc %}
+  Renders a icon
+
+  @param {string} name - The name of the icon which is to be rendered
+  @param {string} [size] - The size of the icon
+  @param {string} [color] - The color of the icon
+
+  @example
+  {% render 'image', name: 'chevron-left' %}
+  @example
+  chevron-left
+  play
+  pause
+  help
+{% enddoc %}
+
+{% liquid
+  capture icon
+    case name
+      when 'chevron-left'
+        echo 'chevron-left.svg' | inline_asset_content
+      when 'help'
+        echo 'help.svg' | inline_asset_content
+      when 'play'
+        echo 'play-circle.svg' | inline_asset_content
+      when 'pause'
+        echo 'pause.svg' | inline_asset_content
+      else
+        echo 'help.svg' | inline_asset_content
+    endcase
+  endcapture
+%}
+
+{%- capture style -%}
+--icon-size:{{ size | default: "24px" }}; --icon-color:{{ color | default:"black" }};
+{%- endcapture -%}
+
+{% stylesheet %}
+  .svg-wrapper svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    color: var(--icon-color);
+    fill: var(--icon-color);
+  }
+{% endstylesheet %}
+
+<div class='svg-wrapper svg-wrapper-{{ name }}' style='{{ style }}'>
+  {{ icon }}
+</div>

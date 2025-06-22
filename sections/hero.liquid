@@ -1,0 +1,41 @@
+<main class="full-width">
+  {% content_for 'blocks' %}
+</main>
+
+{% schema %}
+  {
+    "name": "Section",
+    "class": "section-wrapper full-width",
+    "blocks": [
+      {
+        "type": "@theme"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header"]
+    },
+    "presets": [
+      {
+        "name": "Hero",
+        "blocks": {
+          "carousel": {
+            "type": "carousel",
+            "name": "Carousel",
+            "settings": {
+              "slide_type": "slide",
+              "arrows": "true"
+            }
+          },
+          "text": {
+            "type": "text",
+            "settings": {
+              "text": "Heading",
+              "alignment": "center"
+            }
+          }
+        },
+        "block_order": ["carousel", "text"]
+      }
+    ]
+  }
+{% endschema %}

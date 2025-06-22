@@ -1,0 +1,83 @@
+{% liquid
+  assign desktop_image = block.settings.desktop_image
+  assign mobile_image = block.settings.mobile_image
+%}
+
+{% if mobile_image %}
+  {% assign mobile_sizes = '375,500,840' | split: ',' %}
+  {% capture mobile_sources %}
+    {%- for size in mobile_sizes  -%}
+      <source media='(max-width: {{ size }}px)' srcset='{{ mobile_image | image_url: width: size }}'>
+    {%- endfor -%}
+  {% endcapture %}
+{% endif %}
+
+{% if desktop_image %}
+  {% assign desktop_sizes = '1024,1440,1920' | split: ',' %}
+  {% capture desktop_sources %}
+    {%- for size in desktop_sizes  -%}
+      <source media='(max-width: {{ size }}px)' srcset='{{ desktop_image | image_url: width: size }}'>
+    {%- endfor -%}
+  {% endcapture %}
+{% endif %}
+
+{% if desktop_image or mobile_image %}
+  {{ mobile_sources }}
+  {{ desktop_sources }}
+  <img
+    src='{{ desktop_image | image_url: width: 2160 }}'
+    alt='{{ desktop_image.alt}}'
+    width='100%'
+    height='100%'
+    style='--fit:{{ block.settings.fit }};'
+    class='h-full'>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Image",
+    "class": "image-block h-full",
+    "tag": "picture",
+    "settings": [
+      {
+        "id": "desktop_image",
+        "label": "Desktop image",
+        "type": "image_picker"
+      },
+      {
+        "id": "mobile_image",
+        "label": "Mobile image",
+        "type": "image_picker"
+      },
+      {
+        "type": "select",
+        "id": "fit",
+        "label": "Fit",
+        "options": [
+          {
+            "value": "fill",
+            "label": "Fill"
+          },
+          {
+            "value": "contain",
+            "label": "Contain"
+          },
+          {
+            "value": "cover",
+            "label": "Cover"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "scale-down",
+            "label": "Scale Down"
+          }
+        ],
+        "default": "cover"
+      }
+    ],
+    "presets": [{ "name": "Image" }]
+  }
+{% endschema %}

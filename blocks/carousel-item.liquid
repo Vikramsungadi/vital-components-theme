@@ -1,0 +1,13 @@
+<li class='splide__slide shopify-block-{{ block.id }}'  {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</li>
+
+{% schema %}
+  {
+    "name": "Carousel Item",
+    "tag": null,
+    "settings": [],
+    "blocks": [{ "type": "b-image" }, { "type": "text" }],
+    "presets": [{ "name": "Carousel Item", "blocks": [{ "type": "b-image" }] }]
+  }
+{% endschema %}

@@ -1,0 +1,163 @@
+{% comment %}
+  variants - primary, secondary, outline, link
+  size - small, medium,large
+  hover
+  corners - Square, Pill, Custom
+  custom-padding
+  full-width
+{% endcomment %}
+
+{% doc %}
+  Renders a button block.
+
+  @example
+  {% content_for 'block', type: 'button', id: 'button' %}
+{% enddoc %}
+
+{% stylesheet %}
+  .button {
+    padding: 8px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .button--primary {
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+  }
+
+  .button--secondary {
+    background-color: var(--secondary-background-color);
+    color: var(--secondary-text-color);
+  }
+
+  .button--outline {
+    background-color: var(--outline-background-color);
+    color: var(--outline-text-color);
+    border: 1.5px solid var(--outline-text-color);
+  }
+
+  .button--link {
+    background-color: var(--link-background-color);
+    color: var(--link-text-color);
+  }
+{% endstylesheet %}
+
+{% capture css_variables %}
+    --primary-background-color: {{block.settings.color_scheme.settings.primary_button_background }};
+    --primary-text-color: {{block.settings.color_scheme.settings.primary_button_text }};
+    --secondary-background-color: {{block.settings.color_scheme.settings.secondary_button_background }};
+    --secondary-text-color: {{block.settings.color_scheme.settings.secondary_button_text }};
+    --outline-background-color: {{block.settings.color_scheme.settings.primary_button_text }};
+    --outline-text-color: {{block.settings.color_scheme.settings.primary_button_background }};
+    --link-background-color: transparent;
+    --link-text-color: {{block.settings.color_scheme.settings.primary_button_text }};
+{% endcapture %}
+
+<div
+  class='button-wrapper'
+  style='
+    text-align: {{ block.settings.alignment }};
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    {{ css_variables }}
+  '>
+  <a
+    href='{{ block.settings.button_url }}'
+    class='button {{ block.settings.text_style }}  button--{{ block.settings.button_variant }}'
+    {% if block.settings.open_in_new_tab %}
+      target='_blank' rel='noopener'
+    {% endif %}
+    {{ block.shopify_attributes }}>
+    {{ block.settings.button }}
+  </a>
+</div>
+
+{% schema %}
+  {
+    "name": "Button",
+    "settings": [
+      {
+        "type": "text",
+        "id": "button",
+        "label": "Button text",
+        "default": "Text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "checkbox",
+        "id": "open_in_new_tab",
+        "label": "Open in new tab",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "text_style",
+        "label": "Text style",
+        "options": [
+          { "value": "text--title", "label": "t:options.text_style.title" },
+          { "value": "text--subtitle", "label": "t:options.text_style.subtitle" },
+          { "value": "text--normal", "label": "t:options.text_style.normal" }
+        ],
+        "default": "text--title"
+      },
+      {
+        "type": "select",
+        "id": "button_variant",
+        "label": "Button style",
+        "options": [
+          { "value": "primary", "label": "Primary" },
+          { "value": "secondary", "label": "Secondary" },
+          { "value": "outline", "label": "Outline" },
+          { "value": "link", "label": "Link" }
+        ],
+        "default": "primary"
+      },
+      {
+        "type": "header",
+        "content": "Color settings"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color scheme"
+      },
+      {
+        "type": "header",
+        "content": "Padding settings"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "label": "Top Padding",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "unit": "px",
+        "label": "Bottom Padding",
+        "default": 10
+      }
+    ],
+    "presets": [
+      {
+        "name": "Button"
+      }
+    ]
+  }
+{% endschema %}

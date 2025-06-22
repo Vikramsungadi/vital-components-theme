@@ -1,0 +1,14 @@
+{
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "singleQuote": true,
+  "arrowParens": "always",
+  "printWidth": 140,
+  "semi": true,
+  "trailingComma": "none",
+  "liquidSingleQuote": true,
+  "embeddedSingleQuote": true,
+  "singleLineLinkTags": true,
+  "indentSchema": true,
+  "plugins": ["prettier-plugin-tailwindcss", "@shopify/prettier-plugin-liquid"]
+}

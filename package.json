@@ -4,15 +4,18 @@
   "description": "Shopify Theme for developing components",
   "main": "index.js",
   "scripts": {
+    "dev": "shopify theme dev --live-reload full-page --open -s  theme-vital.myshopify.com",
+    "dev-sync": "shopify theme dev --theme-editor-sync --live-reload full-page --open -s theme-vital.myshopify.com",
     "tw": "npx @tailwindcss/cli -i ./tailwind/input.css -o ./assets/output.css --minify --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.9.3",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11"
   }

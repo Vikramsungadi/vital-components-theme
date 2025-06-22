@@ -1,0 +1,362 @@
+{% capture splide_options %}
+  {
+    "type"   : "{{ block.settings.slide_type }}",
+    "perPage": {{ block.settings.slide_per_page }},
+    "pagination": {{ block.settings.pagination }},
+    "arrows": {{ block.settings.arrows }},
+    "autoplay": {{ block.settings.autoplay }},
+    "interval": {{ block.settings.autoplay_interval | times:1000 }},
+    "gap": "{{ block.settings.gap }}px",
+    "breakpoints": {
+      "768" : {
+        "perPage": {{ block.settings.mobile_slide_per_page }},
+        "gap": "{{ block.settings.mobile_gap }}px",
+        "arrows": {{ block.settings.mobile_arrows }}
+      }
+    }
+  }
+{% endcapture %}
+
+{% stylesheet %}
+  carousel-component .splide__arrow--prev {
+    transform: scaleX(-1);
+  }
+
+  carousel-component .splide__arrows button {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    padding: 0.5rem;
+    fill: white;
+    /* border-radius: 99px; */
+    pointer-events: auto;
+  }
+
+  carousel-component .splide__arrows svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  carousel-component .splide__arrows button:disabled {
+    opacity: 0.5;
+  }
+
+  carousel-component .splide__pagination-wrapper .splide__pagination__page {
+    width: var(--pagination-button-width);
+    height: var(--pagination-button-height);
+    border-radius: var(--pagination-button-radius);
+    background-color: var(--pagination-inactive-color);
+  }
+
+  carousel-component .splide__pagination-wrapper .splide__pagination__page.is-active {
+    background-color: var(--pagination-active-color);
+  }
+{% endstylesheet %}
+
+<style>
+  carousel-component {
+    {% comment %} --aspect-ratio: {{ block.settings.desktop_aspect_ratio }}; {% endcomment %}
+    --pagination-button-radius: {% if block.settings.pagination_dots %}{{ block.settings.pagination_width | divided_by:2 }}px {% else %}
+      {{ block.settings.radius }}px {% endif %};
+    --pagination-button-width: {{ block.settings.pagination_width }}px;
+    --pagination-button-height: {% if block.settings.pagination_dots %} {{ block.settings.pagination_width }}px; {% else %} {{ block.settings.pagination_height }}px {% endif %};
+    --pagination-active-color: {{ block.settings.active_color }};
+    --pagination-inactive-color: {{ block.settings.inactive_color }};
+  }
+  @media screen and (max-width: 768px) {
+    carousel-component {
+      {% comment %} --aspect-ratio: {{ block.settings.mobile_aspect_ratio }}; {% endcomment %}
+    }
+  }
+</style>
+
+<carousel-component
+  data-options='{{ splide_options }}'
+  class='splide stack-container isolate aspect-[var(--aspect-ratio)]'>
+  <div class='splide__track stack-item z-0'>
+    <ul class='splide__list'>
+      {% content_for 'blocks' %}
+    </ul>
+  </div>
+  <div class='splide__arrows pointer-events-none stack-item z-10 flex justify-between items-center max-h-fit self-center px-2'></div>
+
+  {% if block.settings.pagination or block.settings.enable_play_controls %}
+    <div class='splide__pagination-wrapper stack-item z-10 flex justify-center items-center pb-3 self-end'>
+      {% if block.settings.autoplay and block.settings.enable_play_controls %}
+        <button class='splide__toggle pr-2' type='button'>
+          <span class='splide__toggle__play'>
+            {% render 'icon', size: '22px', name: 'play' %}
+          </span>
+          <span class='splide__toggle__pause'>
+            {% render 'icon', size: '22px', name: 'pause' %}
+          </span>
+        </button>
+      {% endif %}
+      <ul class='splide__pagination gap-2 max-h-fit'></ul>
+    </div>
+  {% endif %}
+</carousel-component>
+
+{% schema %}
+  {
+    "name": "Carousel",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Device Specific Settings"
+      },
+      {
+        "type": "radio",
+        "id": "device",
+        "label": "Type",
+        "default": "common",
+        "options": [
+          {
+            "value": "common",
+            "label": "Common"
+          },
+          {
+            "value": "desktop",
+            "label": "Desktop"
+          },
+          {
+            "value": "mobile",
+            "label": "Mobile"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Layout",
+        "visible_if": "{{ block.settings.device != 'common' }}"
+      },
+      {
+        "id": "desktop_aspect_ratio",
+        "label": "Aspect Ratio",
+        "type": "select",
+        "default": "16/9",
+        "options": [
+          { "value": "21/9", "label": "21:9 (Ultra-wide)" },
+          { "value": "16/9", "label": "16:9 (Widescreen)" },
+          { "value": "2/1", "label": "2:1 (Wide Banner)" },
+          { "value": "3/1", "label": "3:1 (Super Wide Banner)" },
+          { "value": "4/3", "label": "4:3 (Standard Boxed)" }
+        ],
+        "visible_if": "{{ block.settings.device == 'desktop' }}"
+      },
+      {
+        "id": "mobile_aspect_ratio",
+        "label": "Aspect Ratio",
+        "type": "select",
+        "default": "3/4",
+        "options": [
+          { "value": "4/5", "label": "4:5 (Portrait)" },
+          { "value": "3/4", "label": "3:4 (Vertical Banner)" },
+          { "value": "2/3", "label": "2:3 (Narrow Portrait)" },
+          { "value": "1/1.5", "label": "1:1.5 (Balanced Tall)" },
+          { "value": "1/1", "label": "1:1 (Square)" }
+        ],
+        "visible_if": "{{ block.settings.device == 'mobile' }}"
+      },
+      {
+        "type": "header",
+        "content": "Carousel"
+      },
+      {
+        "type": "select",
+        "id": "slide_type",
+        "label": "Type",
+        "default": "slide",
+        "options": [
+          {
+            "value": "loop",
+            "label": "Loop"
+          },
+          {
+            "value": "fade",
+            "label": "Fade"
+          },
+          {
+            "value": "slide",
+            "label": "Slide"
+          }
+        ],
+        "visible_if": "{{ block.settings.device == 'common' }}"
+      },
+      {
+        "type": "header",
+        "content": "Autoplay",
+        "visible_if": "{{ block.settings.device == 'common' }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Enable Auto play",
+        "default": false,
+        "info": "Auto play the slides",
+        "visible_if": "{{ block.settings.device == 'common' }}"
+      },
+      {
+        "type": "range",
+        "id": "autoplay_interval",
+        "label": "Auto play duration",
+        "min": 1,
+        "max": 10,
+        "default": 3,
+        "step": 0.5,
+        "unit": "sec",
+        "visible_if": "{{ block.settings.autoplay and block.settings.device == 'common'}}"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_play_controls",
+        "label": "Autoplay controls",
+        "default": false,
+        "info": "Play/Pause button along with the pagination",
+        "visible_if": "{{ block.settings.device == 'common' and block.settings.autoplay }}"
+      },
+      {
+        "type": "range",
+        "id": "slide_per_page",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "Slide per page",
+        "default": 1,
+        "visible_if": "{{ block.settings.slide_type != 'fade' and block.settings.device == 'desktop' }}"
+      },
+      {
+        "type": "range",
+        "id": "mobile_slide_per_page",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "Slide per page",
+        "default": 1,
+        "visible_if": "{{ block.settings.slide_type != 'fade' and block.settings.device == 'mobile'}}"
+      },
+      {
+        "type": "checkbox",
+        "visible_if": "{{ block.settings.device == 'desktop' }}",
+        "id": "arrows",
+        "label": "Enable arrows",
+        "default": true,
+        "info": "Enables arrows button for navigation"
+      },
+      {
+        "type": "checkbox",
+        "visible_if": "{{ block.settings.device == 'mobile' }}",
+        "id": "mobile_arrows",
+        "label": "Enable arrows",
+        "default": true,
+        "info": "Enables arrows button for navigation"
+      },
+      {
+        "type": "range",
+        "id": "mobile_gap",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "label": "Gap",
+        "default": 5,
+        "visible_if": "{{ block.settings.mobile_slide_per_page > 1 and block.settings.device == 'mobile' }}",
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "gap",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "label": "Gap",
+        "default": 5,
+        "visible_if": "{{ block.settings.slide_per_page > 1 and block.settings.device == 'desktop' }}",
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Pagination",
+        "visible_if": "{{ block.settings.device == 'common' }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "pagination",
+        "label": "Show pagination",
+        "default": false,
+        "info": "Enables dots at bottom of carousel",
+        "visible_if": "{{ block.settings.device == 'common' }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "pagination_dots",
+        "label": "Dots",
+        "default": true,
+        "visible_if": "{{ block.settings.pagination and block.settings.device == 'common'}}"
+      },
+      {
+        "type": "range",
+        "id": "pagination_width",
+        "min": 6,
+        "max": 40,
+        "step": 2,
+        "label": "Width",
+        "default": 10,
+        "visible_if": "{{ block.settings.pagination and block.settings.device == 'common'}}",
+        "unit": "px"
+      },
+      {
+        "type": "color",
+        "id": "inactive_color",
+        "label": "Inactive color",
+        "visible_if": "{{ block.settings.pagination and block.settings.device == 'common'}}"
+      },
+      {
+        "type": "color",
+        "id": "active_color",
+        "label": "Active color",
+        "visible_if": "{{ block.settings.pagination and block.settings.device == 'common'}}"
+      },
+      {
+        "type": "range",
+        "id": "pagination_height",
+        "min": 6,
+        "max": 40,
+        "step": 2,
+        "label": "Height",
+        "default": 10,
+        "visible_if": "{{ block.settings.pagination and block.settings.pagination_dots != true and block.settings.device == 'common'}}",
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "label": "Radius",
+        "default": 5,
+        "visible_if": "{{ block.settings.pagination and block.settings.pagination_dots != true and block.settings.device == 'common'}}",
+        "unit": "px"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "carousel-item"
+      }
+    ],
+    "presets": [
+      { "name": "Heading" },
+      {
+        "name": "Carousel",
+        "settings": {
+          "slide_type": "slide"
+        },
+        "blocks": [
+          {
+            "type": "carousel-item"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
