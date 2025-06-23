@@ -1,64 +1,79 @@
 {% doc %}
-  Renders a responsive image that might be wrapped in a link.
-
-  When `width`, `height` and `crop` are provided, the image will be rendered
-  with a fixed aspect ratio.
-
-  Serves as an example of how to use the `image_url` filter and `image_tag` filter
-  as well as how you can use LiquidDoc to document your code.
-
-  @param {image} image - The image to be rendered
-  @param {string} [url] - An optional destination URL for the image
-  @param {string} [class] - Optional class to be added to the image wrapper
-  @param {number} [width] - The highest resolution width of the image to be rendered
-  @param {number} [height] - The highest resolution height of the image to be rendered
-  @param {string} [crop] - The crop position of the image
+  @param {image} desktop_image - The image object shown on desktop.
+  @param {image} [mobile_image] - An optional image object for mobile viewports.
+  @param {string} [class] - Optional class(es) to be added to the picture element.
+  @param {string} [id] - A unique identifier used to scope CSS custom properties (e.g., section.id or block.id).
+  @param {string} [fit] - The CSS object-fit value (e.g., "cover", "contain").
+  @param {string} [attributes] - Pixel value used when `border_radius` is "custom".
+  @param {string} [desktop_width]
+  @param {string} [mobile_width]
+  @param {string} [height]
+  @param {link} [url]
 
   @example
-  {% render 'image', image: product.featured_image %}
-  {% render 'image', image: product.featured_image, url: product.url %}
-  {% render 'image',
-    class: 'product__image',
-    image: product.featured_image,
-    url: product.url,
-    width: 1200,
-    height: 800,
-    crop: 'center',
+  {% render 'image-block',
+    id: section.id,
+    class: 'my-image',
+    desktop_image: section.settings.desktop_image,
+    mobile_image: section.settings.mobile_image,
+    fit: 'cover',
+    border_radius: '8',
+    custom_border_radius: 12
   %}
 {% enddoc %}
 
-{% liquid
-  unless height
-    assign width = width | default: image.width
-  endunless
-
-  if url
-    assign wrapper = 'a'
-  else
-    assign wrapper = 'div'
-  endif
-%}
-
-<{{ wrapper }}
-  class="image {{ class }}"
-  {% if url %}
-    href="{{ url }}"
+{% unless desktop_width or mobile_width %}
+  {% if mobile_image %}
+    {% assign mobile_sizes = '375,500,840' | split: ',' %}
+    {% capture mobile_sources %}
+      {%- for size in mobile_sizes -%}
+        <source media="(max-width: {{ size }}px)" srcset="{{ mobile_image | image_url: width: size }}">
+      {%- endfor -%}
+    {% endcapture %}
   {% endif %}
->
-  {{ image | image_url: width: width, height: height, crop: crop | image_tag }}
-</{{ wrapper }}>
+
+  {% if desktop_image %}
+    {% assign desktop_sizes = '1024,1440,1920' | split: ',' %}
+    {% capture desktop_sources %}
+      {%- for size in desktop_sizes -%}
+        <source media="(max-width: {{ size }}px)" srcset="{{ desktop_image | image_url: width: size }}">
+      {%- endfor -%}
+    {% endcapture %}
+  {% endif %}
+{% endunless %}
 
 {% stylesheet %}
-  .image {
-    display: block;
-    position: relative;
+  .image-block {
     overflow: hidden;
-    width: 100%;
-    height: auto;
-  }
-
-  .image > img {
-    width: 100%;
-    height: auto;
+    border-radius: var(--border-radius, 0);
   }
 {% endstylesheet %}
+
+{% if desktop_image or mobile_image %}
+  {% capture image_element %}
+    <picture class="image-block image-block-{{ id }} {{ class }}" {{ attributes }}>
+    {% unless desktop_width or mobile_width %}
+      {{ mobile_sources }}
+      {{ desktop_sources }}
+    {% endunless  %}
+    {% if desktop_width or mobile_width %}
+      <source media='(max-width: 768px)' srcset='{{ mobile_image | image_url: width: mobile_width | default:"500" }}'>
+    {% endif %}
+      <img
+        src="{{ desktop_image | image_url: width: desktop_width | default: '2560' }}"
+        alt="{{ desktop_image.alt | escape }}"
+        width="{{ desktop_width | default: '100%' }}"
+        height="{{ height | default: '100%' }}"
+        style="object-fit: {{ fit }};"
+        class="h-full w-full">
+    </picture>
+  {% endcapture %}
+
+  {% if url %}
+    <a href='{{ url }}'>
+      {{ image_element }}
+    </a>
+  {% else %}
+    {{ image_element }}
+  {% endif %}
+{% endif %}

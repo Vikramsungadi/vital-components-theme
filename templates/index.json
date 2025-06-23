@@ -31,6 +31,7 @@
             "mobile_slide_per_page": 1,
             "arrows": false,
             "mobile_arrows": false,
+            "arrows_background": "#ffffff",
             "mobile_gap": 5,
             "gap": 4,
             "pagination": false,
@@ -131,7 +132,7 @@
           "type": "carousel",
           "name": "Hero Section",
           "settings": {
-            "device": "mobile",
+            "device": "desktop",
             "desktop_aspect_ratio": "16/9",
             "mobile_aspect_ratio": "3/4",
             "slide_type": "slide",
@@ -142,6 +143,7 @@
             "mobile_slide_per_page": 1,
             "arrows": true,
             "mobile_arrows": false,
+            "arrows_background": "#00000021",
             "mobile_gap": 5,
             "gap": 4,
             "pagination": true,
@@ -161,9 +163,11 @@
                 "b_image_LXEB8D": {
                   "type": "b-image",
                   "settings": {
-                    "desktop_image": "shopify://shop_images/DESKTOP_BANNER_-_2.png",
-                    "mobile_image": "shopify://shop_images/MOBILE_BANNER_-_2.png",
-                    "fit": "cover"
+                    "desktop_image": "shopify://shop_images/Hero-banner-1.png",
+                    "mobile_image": "shopify://shop_images/mobile-banner-1.png",
+                    "fit": "cover",
+                    "border_radius": "0",
+                    "custom_border_radius": 0
                   },
                   "blocks": {}
                 }
@@ -180,9 +184,11 @@
                 "b_image_PDgMkN": {
                   "type": "b-image",
                   "settings": {
-                    "desktop_image": "shopify://shop_images/Group_3.png",
-                    "mobile_image": "shopify://shop_images/Group_5.png",
-                    "fit": "cover"
+                    "desktop_image": "shopify://shop_images/Hero-banner-2_2fcaa820-c699-46da-a0f8-23d0b66eb393.png",
+                    "mobile_image": "shopify://shop_images/mobile-banner-2.png",
+                    "fit": "cover",
+                    "border_radius": "0",
+                    "custom_border_radius": 0
                   },
                   "blocks": {}
                 }
@@ -199,9 +205,11 @@
                 "b_image_R3xijc": {
                   "type": "b-image",
                   "settings": {
-                    "desktop_image": "shopify://shop_images/DESKTOP_BANNER_-_1.png",
-                    "mobile_image": "shopify://shop_images/MOBILE_BANNER_-_1.png",
-                    "fit": "cover"
+                    "desktop_image": "shopify://shop_images/Hero-banner-3.png",
+                    "mobile_image": "shopify://shop_images/mobile-banner-3.png",
+                    "fit": "cover",
+                    "border_radius": "0",
+                    "custom_border_radius": 0
                   },
                   "blocks": {}
                 }
@@ -234,15 +242,16 @@
           "settings": {
             "layout_direction": "group--vertical",
             "alignment": "center",
-            "padding": 20,
-            "gap": 20
+            "padding": 48,
+            "gap": 36
           },
           "blocks": {
             "text_DwWrBj": {
               "type": "text",
+              "name": "Title",
               "settings": {
                 "device": "mobile",
-                "text": "Explore Collections",
+                "text": "SHOP BY COLLECTION",
                 "text_style": "text--title",
                 "text_style_mobile": "text--title__mobile",
                 "font_size": 16,
@@ -257,19 +266,20 @@
               "type": "carousel",
               "name": "Collection List Scroller",
               "settings": {
-                "device": "mobile",
+                "device": "desktop",
                 "desktop_aspect_ratio": "16/9",
                 "mobile_aspect_ratio": "3/4",
                 "slide_type": "slide",
                 "autoplay": false,
                 "autoplay_interval": 3,
                 "enable_play_controls": false,
-                "slide_per_page": 5,
-                "mobile_slide_per_page": 2,
+                "slide_per_page": 7,
+                "mobile_slide_per_page": 4,
                 "arrows": true,
-                "mobile_arrows": true,
-                "mobile_gap": 0,
-                "gap": 5,
+                "mobile_arrows": false,
+                "arrows_background": "#ffffff0a",
+                "mobile_gap": 10,
+                "gap": 31,
                 "pagination": false,
                 "pagination_dots": true,
                 "pagination_width": 10,
@@ -287,8 +297,10 @@
                       "type": "b-image",
                       "name": "Image",
                       "settings": {
-                        "desktop_image": "shopify://shop_images/men-collection-banner.png",
-                        "fit": "cover"
+                        "desktop_image": "shopify://shop_images/mens-collection-banner.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
                       },
                       "blocks": {}
                     }
@@ -305,8 +317,10 @@
                       "type": "b-image",
                       "name": "Image",
                       "settings": {
-                        "desktop_image": "shopify://shop_images/women-collection-banner.png",
-                        "fit": "cover"
+                        "desktop_image": "shopify://shop_images/formal-wear-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
                       },
                       "blocks": {}
                     }
@@ -323,8 +337,10 @@
                       "type": "b-image",
                       "name": "Image",
                       "settings": {
-                        "desktop_image": "shopify://shop_images/jeans-collection-banner.png",
-                        "fit": "cover"
+                        "desktop_image": "shopify://shop_images/jeans-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
                       },
                       "blocks": {}
                     }
@@ -341,8 +357,10 @@
                       "type": "b-image",
                       "name": "Image",
                       "settings": {
-                        "desktop_image": "shopify://shop_images/kids-collection-banner.png",
-                        "fit": "cover"
+                        "desktop_image": "shopify://shop_images/kids-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
                       },
                       "blocks": {}
                     }
@@ -359,8 +377,10 @@
                       "type": "b-image",
                       "name": "Image",
                       "settings": {
-                        "desktop_image": "shopify://shop_images/shoes-collection-banner.png",
-                        "fit": "cover"
+                        "desktop_image": "shopify://shop_images/shoes-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
                       },
                       "blocks": {}
                     }
@@ -377,14 +397,56 @@
                       "type": "b-image",
                       "name": "Image",
                       "settings": {
-                        "desktop_image": "shopify://shop_images/sportswear-collection-banner.png",
-                        "fit": "cover"
+                        "desktop_image": "shopify://shop_images/sportswear-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
                     "b_image_aQQjHG"
+                  ]
+                },
+                "carousel_item_NeaaKm": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_9HwbWd": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/formal-wear-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_9HwbWd"
+                  ]
+                },
+                "carousel_item_4tEPjh": {
+                  "type": "carousel-item",
+                  "settings": {},
+                  "blocks": {
+                    "b_image_3R8J3n": {
+                      "type": "b-image",
+                      "name": "Image",
+                      "settings": {
+                        "desktop_image": "shopify://shop_images/accessories-collection-banner_1.png",
+                        "fit": "cover",
+                        "border_radius": "999999",
+                        "custom_border_radius": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "b_image_3R8J3n"
                   ]
                 }
               },
@@ -394,7 +456,9 @@
                 "carousel_item_rWqBmK",
                 "carousel_item_QyhJGF",
                 "carousel_item_a8QKaA",
-                "carousel_item_eMMXGU"
+                "carousel_item_eMMXGU",
+                "carousel_item_NeaaKm",
+                "carousel_item_4tEPjh"
               ]
             }
           },
@@ -407,67 +471,116 @@
       "block_order": [
         "group_Gd9Lq9"
       ],
-      "name": "Collection List",
+      "name": "SHOP BY COLLECTION",
       "settings": {}
     },
     "custom_section_M8gD3i": {
       "type": "custom-section",
       "blocks": {
-        "grid_i6BiLY": {
-          "type": "grid",
-          "name": "Grid",
+        "group_QwkydL": {
+          "type": "group",
+          "name": "Wrapper",
           "settings": {
-            "device": "mobile",
-            "columns": 3,
-            "columns_mobile": 2
+            "layout_direction": "group--vertical",
+            "alignment": "center",
+            "padding": 20,
+            "gap": 50
           },
           "blocks": {
-            "b_image_6fpqAE": {
-              "type": "b-image",
-              "name": "Image",
+            "text_BWAJ7y": {
+              "type": "text",
+              "name": "Title",
               "settings": {
-                "desktop_image": "shopify://shop_images/shoes-collection-banner.png",
-                "fit": "cover"
+                "device": "desktop",
+                "text": "ONLY FOR WOMEN",
+                "text_style": "text--title",
+                "text_style_mobile": "text--title__mobile",
+                "font_size": 16,
+                "font_size_mobile": 16,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "color_scheme": ""
               },
               "blocks": {}
             },
-            "b_image_LNz4Yh": {
-              "type": "b-image",
-              "name": "Image",
+            "grid_FwefwR": {
+              "type": "grid",
+              "name": "Image Grid",
               "settings": {
-                "desktop_image": "shopify://shop_images/formal-wear-collection-banner.png",
-                "fit": "cover"
+                "device": "common",
+                "columns": 2,
+                "gap": 0,
+                "columns_mobile": 1,
+                "mobile_gap": 0
               },
-              "blocks": {}
-            },
-            "b_image_qih49k": {
-              "type": "b-image",
-              "name": "Image",
-              "settings": {
-                "desktop_image": "shopify://shop_images/sportswear-collection-banner.png",
-                "fit": "cover"
+              "blocks": {
+                "b_image_6fpqAE": {
+                  "type": "b-image",
+                  "name": "Image",
+                  "settings": {
+                    "desktop_image": "shopify://shop_images/shoes-collection-banner.png",
+                    "fit": "cover",
+                    "border_radius": "0",
+                    "custom_border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "b_image_LNz4Yh": {
+                  "type": "b-image",
+                  "name": "Image",
+                  "settings": {
+                    "desktop_image": "shopify://shop_images/formal-wear-collection-banner.png",
+                    "fit": "cover",
+                    "border_radius": "0",
+                    "custom_border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "b_image_qih49k": {
+                  "type": "b-image",
+                  "name": "Image",
+                  "disabled": true,
+                  "settings": {
+                    "desktop_image": "shopify://shop_images/sportswear-collection-banner.png",
+                    "fit": "cover",
+                    "border_radius": "0",
+                    "custom_border_radius": 0
+                  },
+                  "blocks": {}
+                }
               },
-              "blocks": {}
+              "block_order": [
+                "b_image_6fpqAE",
+                "b_image_LNz4Yh",
+                "b_image_qih49k"
+              ]
             }
           },
           "block_order": [
-            "b_image_6fpqAE",
-            "b_image_LNz4Yh",
-            "b_image_qih49k"
+            "text_BWAJ7y",
+            "grid_FwefwR"
           ]
         }
       },
       "block_order": [
-        "grid_i6BiLY"
+        "group_QwkydL"
       ],
-      "name": "t:general.custom_section",
+      "name": "ONLY FOR WOMEN",
       "settings": {}
+    },
+    "product_list_4N7ck8": {
+      "type": "product-list",
+      "name": "Product List",
+      "settings": {
+        "collection": "all"
+      }
     }
   },
   "order": [
     "main",
     "hero_nY3nGy",
     "custom_section_XTD4p7",
-    "custom_section_M8gD3i"
+    "custom_section_M8gD3i",
+    "product_list_4N7ck8"
   ]
 }

@@ -1,43 +1,24 @@
 {% liquid
   assign desktop_image = block.settings.desktop_image
   assign mobile_image = block.settings.mobile_image
+  assign border_radius = '0'
+  if block.settings.border_radius == 'custom'
+    assign border_radius = block.settings.custom_border_radius
+  else
+    assign border_radius = block.settings.border_radius
+  endif
 %}
+<style>
+  .shopify-block-{{ block.id }}{
+    --border-radius: {{ border_radius }}px;
+  }
+</style>
 
-{% if mobile_image %}
-  {% assign mobile_sizes = '375,500,840' | split: ',' %}
-  {% capture mobile_sources %}
-    {%- for size in mobile_sizes  -%}
-      <source media='(max-width: {{ size }}px)' srcset='{{ mobile_image | image_url: width: size }}'>
-    {%- endfor -%}
-  {% endcapture %}
-{% endif %}
-
-{% if desktop_image %}
-  {% assign desktop_sizes = '1024,1440,1920' | split: ',' %}
-  {% capture desktop_sources %}
-    {%- for size in desktop_sizes  -%}
-      <source media='(max-width: {{ size }}px)' srcset='{{ desktop_image | image_url: width: size }}'>
-    {%- endfor -%}
-  {% endcapture %}
-{% endif %}
-
-{% if desktop_image or mobile_image %}
-  {{ mobile_sources }}
-  {{ desktop_sources }}
-  <img
-    src='{{ desktop_image | image_url: width: 2160 }}'
-    alt='{{ desktop_image.alt}}'
-    width='100%'
-    height='100%'
-    style='--fit:{{ block.settings.fit }};'
-    class='h-full'>
-{% endif %}
+{% render 'image', id: block.id, desktop_image: desktop_image, mobile_image: mobile_image, fit: block.settings.fit %}
 
 {% schema %}
   {
     "name": "Image",
-    "class": "image-block h-full",
-    "tag": "picture",
     "settings": [
       {
         "id": "desktop_image",
@@ -76,6 +57,32 @@
           }
         ],
         "default": "cover"
+      },
+      {
+        "type": "select",
+        "id": "border_radius",
+        "label": "Corners",
+        "default": "0",
+        "options": [
+          { "value": "0", "label": "None" },
+          { "value": "4", "label": "Small" },
+          { "value": "8", "label": "Medium" },
+          { "value": "16", "label": "Large" },
+          { "value": "24", "label": "Extra Large" },
+          { "value": "999999", "label": "Full (circular)" },
+          { "value": "custom", "label": "Custom" }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "custom_border_radius",
+        "label": "Border Radius",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "visible_if": "{{ block.settings.border_radius == 'custom' }}"
       }
     ],
     "presets": [{ "name": "Image" }]

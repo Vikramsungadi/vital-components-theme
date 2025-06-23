@@ -24,7 +24,7 @@
 
   carousel-component .splide__arrows button {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--arrow-background, rgba(0, 0, 0, 0.4));
     backdrop-filter: blur(2px);
     padding: 0.5rem;
     fill: white;
@@ -54,7 +54,7 @@
 {% endstylesheet %}
 
 <style>
-  carousel-component {
+  .carousel-{{block.id }} {
     {% comment %} --aspect-ratio: {{ block.settings.desktop_aspect_ratio }}; {% endcomment %}
     --pagination-button-radius: {% if block.settings.pagination_dots %}{{ block.settings.pagination_width | divided_by:2 }}px {% else %}
       {{ block.settings.radius }}px {% endif %};
@@ -62,9 +62,10 @@
     --pagination-button-height: {% if block.settings.pagination_dots %} {{ block.settings.pagination_width }}px; {% else %} {{ block.settings.pagination_height }}px {% endif %};
     --pagination-active-color: {{ block.settings.active_color }};
     --pagination-inactive-color: {{ block.settings.inactive_color }};
+    --arrow-background: {{ block.settings.arrows_background }};
   }
   @media screen and (max-width: 768px) {
-    carousel-component {
+    .carousel-{{block.id }} {
       {% comment %} --aspect-ratio: {{ block.settings.mobile_aspect_ratio }}; {% endcomment %}
     }
   }
@@ -72,7 +73,8 @@
 
 <carousel-component
   data-options='{{ splide_options }}'
-  class='splide stack-container isolate aspect-[var(--aspect-ratio)]'>
+  class='carousel-{{ block.id }} splide stack-container isolate aspect-[var(--aspect-ratio)]'
+  {{ block.shopify_attributes }}>
   <div class='splide__track stack-item z-0'>
     <ul class='splide__list'>
       {% content_for 'blocks' %}
@@ -100,6 +102,7 @@
 {% schema %}
   {
     "name": "Carousel",
+    "tag": null,
     "settings": [
       {
         "type": "header",
@@ -252,10 +255,16 @@
         "info": "Enables arrows button for navigation"
       },
       {
+        "type": "color",
+        "id": "arrows_background",
+        "label": "Arrows background color",
+        "default": "#00000021"
+      },
+      {
         "type": "range",
         "id": "mobile_gap",
         "min": 0,
-        "max": 20,
+        "max": 100,
         "step": 1,
         "label": "Gap",
         "default": 5,
@@ -266,7 +275,7 @@
         "type": "range",
         "id": "gap",
         "min": 0,
-        "max": 20,
+        "max": 100,
         "step": 1,
         "label": "Gap",
         "default": 5,

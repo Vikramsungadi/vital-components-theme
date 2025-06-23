@@ -1,20 +1,30 @@
-<style>
-  .shopify-block-{{ block.id }}{
+{% stylesheet %}
+  .grid-block {
     display: grid;
-    grid-template-columns: repeat({{ block.settings.columns }},1fr);
+    grid-template-columns: repeat(var(--grid-cols-desktop), 1fr);
+    gap: var(--grid-gap-desktop);
   }
 
-  @media screen and (max-width:768px){
-  .shopify-block-{{ block.id }}{
-    display: grid;
-    grid-template-columns: repeat({{ block.settings.columns_mobile }},1fr);
+  @media screen and (max-width: 768px) {
+    .grid-block {
+      grid-template-columns: repeat(var(--grid-cols-mobile), 1fr);
+      gap: var(--grid-gap-mobile);
+    }
   }
+{% endstylesheet %}
+
+<style>
+  .shopify-block-{{ block.id }}{
+    --grid-cols-desktop: {{ block.settings.columns }};
+    --grid-cols-mobile: {{ block.settings.columns_mobile }};
+    --grid-gap-desktop: {{ block.settings.gap }}px;
+    --grid-gap-mobile: {{ block.settings.mobile_gap }}px;
   }
 </style>
 
-<section class='shopify-block-{{ block.id }}' {{ block.shopify_attributes }}>
+<div class='grid-block shopify-block-{{ block.id }}' {{ block.shopify_attributes }}>
   {% content_for 'blocks' %}
-</section>
+</div>
 
 {% schema %}
   {
@@ -53,11 +63,33 @@
       },
       {
         "type": "range",
+        "id": "gap",
+        "label": "Gap",
+        "unit": "px",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "visible_if": "{{ block.settings.device == 'desktop' }}"
+      },
+      {
+        "type": "range",
         "id": "columns_mobile",
         "label": "Columns",
         "default": 2,
         "min": 1,
         "max": 10,
+        "step": 1,
+        "visible_if": "{{ block.settings.device == 'mobile' }}"
+      },
+      {
+        "type": "range",
+        "id": "mobile_gap",
+        "label": "Gap",
+        "unit": "px",
+        "default": 0,
+        "min": 0,
+        "max": 100,
         "step": 1,
         "visible_if": "{{ block.settings.device == 'mobile' }}"
       }
