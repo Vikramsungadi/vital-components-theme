@@ -1,4 +1,4 @@
-tailwind/
+tailwind/*
 package.json
 README.md
 prettier.config.js
