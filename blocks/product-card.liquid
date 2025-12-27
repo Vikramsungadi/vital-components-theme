@@ -1,9 +1,10 @@
 {% doc %}
   @param {product} product - Product object
 {% enddoc %}
+
 <div class='product-card'>
   {% render 'image', desktop_image: closest.product.featured_image, desktop_width: '500' %}
-  {% content_for 'block', id: 'product-card-title', type: 'text' %}
+  {% content_for 'block', id: 'product-card-title', type: 'text', closest.product: product %}
 </div>
 
 {% schema %}
