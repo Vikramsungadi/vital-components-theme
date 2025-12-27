@@ -3,10 +3,18 @@
 {% enddoc %}
 <div class='product-card'>
   {% render 'image', desktop_image: closest.product.featured_image, desktop_width: '500' %}
+  {% content_for 'block', id: 'product-card-title', type: 'text', closest.product: product %}
 </div>
 
 {% schema %}
   {
-    "name": "Product Card"
+    "name": "Product Card",
+    "blocks": [{ "type": "text" }],
+    "presets": [
+      {
+        "name": "Product Card",
+        "blocks": [{ "type": "text", "id": "product-card-title", "static": true, "settings": { "text": "VIKRAm" } }]
+      }
+    ]
   }
 {% endschema %}

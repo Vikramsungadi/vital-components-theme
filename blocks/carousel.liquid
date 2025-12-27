@@ -1,3 +1,15 @@
+{% doc %}
+  @param {object} [children]
+{% enddoc %}
+
+{% capture elements %}
+  {% if children == blank %}
+    {% content_for 'blocks' %}
+  {% else %}
+    {{ children }}
+  {% endif %}
+{% endcapture %}
+
 {% capture splide_options %}
   {
     "type"   : "{{ block.settings.slide_type }}",
@@ -75,17 +87,17 @@
   data-options='{{ splide_options }}'
   class='carousel-{{ block.id }} splide stack-container isolate aspect-[var(--aspect-ratio)]'
   {{ block.shopify_attributes }}>
-  <div class='splide__track stack-item z-0'>
+  <div class='z-0 splide__track stack-item'>
     <ul class='splide__list'>
-      {% content_for 'blocks' %}
+      {{ elements }}
     </ul>
   </div>
-  <div class='splide__arrows pointer-events-none stack-item z-10 flex justify-between items-center max-h-fit self-center px-2'></div>
+  <div class='z-10 flex items-center self-center justify-between px-2 pointer-events-none splide__arrows stack-item max-h-fit'></div>
 
   {% if block.settings.pagination or block.settings.enable_play_controls %}
-    <div class='splide__pagination-wrapper stack-item z-10 flex justify-center items-center pb-3 self-end'>
+    <div class='z-10 flex items-center self-end justify-center pb-3 splide__pagination-wrapper stack-item'>
       {% if block.settings.autoplay and block.settings.enable_play_controls %}
-        <button class='splide__toggle pr-2' type='button'>
+        <button class='pr-2 splide__toggle' type='button'>
           <span class='splide__toggle__play'>
             {% render 'icon', size: '22px', name: 'play' %}
           </span>
@@ -94,7 +106,7 @@
           </span>
         </button>
       {% endif %}
-      <ul class='splide__pagination gap-2 max-h-fit'></ul>
+      <ul class='gap-2 splide__pagination max-h-fit'></ul>
     </div>
   {% endif %}
 </carousel-component>

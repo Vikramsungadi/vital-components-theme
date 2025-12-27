@@ -4,8 +4,8 @@
   "description": "Shopify Theme for developing components",
   "main": "index.js",
   "scripts": {
-    "dev": "shopify theme dev --live-reload full-page --open -s  theme-vital.myshopify.com",
-    "dev-sync": "shopify theme dev --theme-editor-sync --live-reload full-page --open -s theme-vital.myshopify.com",
+    "dev-nosync": "shopify theme dev --live-reload full-page --open -s  theme-vital.myshopify.com",
+    "start": "shopify theme dev --theme-editor-sync --live-reload full-page --open -s theme-vital.myshopify.com",
     "tw": "npx @tailwindcss/cli -i ./tailwind/input.css -o ./assets/output.css --minify --watch"
   },
   "keywords": [],
