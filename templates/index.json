@@ -568,73 +568,6 @@
       "name": "ONLY FOR WOMEN",
       "settings": {}
     },
-    "product_list_xrYeCg": {
-      "type": "product-list",
-      "blocks": {
-        "product-card": {
-          "type": "product-card",
-          "static": true,
-          "settings": {},
-          "blocks": {
-            "product-card-title": {
-              "type": "text",
-              "static": true,
-              "settings": {
-                "device": "common",
-                "text": "",
-                "text_style": "text--title",
-                "text_style_mobile": "text--title__mobile",
-                "font_size": 16,
-                "font_size_mobile": 16,
-                "alignment": "left",
-                "alignment_mobile": "left",
-                "color_scheme": ""
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": []
-        },
-        "product-card-item": {
-          "type": "carousel-item",
-          "static": true,
-          "settings": {},
-          "blocks": {}
-        },
-        "product-list": {
-          "type": "carousel",
-          "static": true,
-          "settings": {
-            "device": "common",
-            "desktop_aspect_ratio": "16/9",
-            "mobile_aspect_ratio": "3/4",
-            "slide_type": "slide",
-            "autoplay": false,
-            "autoplay_interval": 3,
-            "enable_play_controls": false,
-            "slide_per_page": 5,
-            "mobile_slide_per_page": 1,
-            "arrows": true,
-            "mobile_arrows": true,
-            "arrows_background": "#00000021",
-            "mobile_gap": 5,
-            "gap": 5,
-            "pagination": false,
-            "pagination_dots": true,
-            "pagination_width": 10,
-            "inactive_color": "",
-            "active_color": "",
-            "pagination_height": 10,
-            "radius": 5
-          },
-          "blocks": {}
-        }
-      },
-      "name": "Product List",
-      "settings": {
-        "collection": "all"
-      }
-    },
     "custom_section_yCDCNz": {
       "type": "custom-section",
       "blocks": {
@@ -805,7 +738,7 @@
       "name": "t:general.custom_section",
       "settings": {}
     },
-    "product_list_FPVhEG": {
+    "product_list_tmB8hB": {
       "type": "product-list",
       "blocks": {
         "product-card": {
@@ -818,7 +751,7 @@
               "static": true,
               "settings": {
                 "device": "common",
-                "text": "{{ closest.product.title }}",
+                "text": "",
                 "text_style": "text--title",
                 "text_style_mobile": "text--title__mobile",
                 "font_size": 16,
@@ -849,7 +782,7 @@
             "autoplay": false,
             "autoplay_interval": 3,
             "enable_play_controls": false,
-            "slide_per_page": 4,
+            "slide_per_page": 5,
             "mobile_slide_per_page": 1,
             "arrows": true,
             "mobile_arrows": true,
@@ -869,7 +802,7 @@
       },
       "name": "Product List",
       "settings": {
-        "collection": "vital-branded-products"
+        "collection": "all"
       }
     }
   },
@@ -878,8 +811,7 @@
     "hero_nY3nGy",
     "custom_section_XTD4p7",
     "custom_section_M8gD3i",
-    "product_list_xrYeCg",
     "custom_section_yCDCNz",
-    "product_list_FPVhEG"
+    "product_list_tmB8hB"
   ]
 }
