@@ -3,7 +3,7 @@
 {% enddoc %}
 <div class='product-card'>
   {% render 'image', desktop_image: closest.product.featured_image, desktop_width: '500' %}
-  {% content_for 'block', id: 'product-card-title', type: 'text', closest.product: product %}
+  {% content_for 'block', id: 'product-card-title', type: 'text' %}
 </div>
 
 {% schema %}
