@@ -1,0 +1,86 @@
+{% capture carousel_children %}
+  {% for product in block.settings.collection.products %}
+      <li class='splide__slide' >
+        {% content_for 'block', type: 'product-card', id: 'product-card', product: product, closest.product: product %}
+        </li>
+  {% endfor %}
+{% endcapture %}
+
+{% content_for 'block', type: 'carousel', id: 'product-list', children: carousel_children %}
+
+{% schema %}
+  {
+    "name": "Product list",
+    "class": "product-list-wrapper",
+    "blocks": [{ "type": "@theme" }],
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection",
+        "info": "Select collection to display"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product List",
+        "blocks": [
+          {
+            "type": "carousel",
+            "static": true,
+            "id": "product-list",
+            "settings": {
+              "desktop_aspect_ratio": "16/9",
+              "mobile_aspect_ratio": "3/4",
+              "slide_type": "slide",
+              "autoplay": false,
+              "autoplay_interval": 3,
+              "enable_play_controls": false,
+              "slide_per_page": 5,
+              "mobile_slide_per_page": 2,
+              "arrows": true,
+              "mobile_arrows": true,
+              "arrows_background": "#00000021",
+              "mobile_gap": 5,
+              "gap": 5,
+              "pagination": false,
+              "pagination_dots": true,
+              "pagination_width": 10,
+              "inactive_color": "",
+              "active_color": "",
+              "pagination_height": 10,
+              "radius": 5
+            }
+          },
+          {
+            "id": "product-card",
+            "type": "product-card",
+            "static": true,
+            "settings": { "show_seconday_image": true },
+            "blocks": [
+              {
+                "type": "text",
+                "id": "product-card-title",
+                "static": true,
+                "settings": {
+                  "text": "{{ closest.product.title }}",
+                  "text_style": "text--normal",
+                  "text_style_mobile": "text--normal__mobile"
+                }
+              },
+              {
+                "type": "text",
+                "id": "product-card-price",
+                "static": true,
+                "settings": {
+                  "text_style": "text--normal",
+                  "text_style_mobile": "text--normal__mobile"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

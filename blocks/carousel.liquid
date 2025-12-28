@@ -4,7 +4,11 @@
 
 {% capture elements %}
   {% if children == blank %}
-    {% content_for 'blocks' %}
+    {% for _block in block.blocks %}
+      <li class='splide__slide shopify-block-{{ _block.id }}' {{ _block.shopify_attributes }}>
+        {% render _block %}
+      </li>
+    {% endfor %}
   {% else %}
     {{ children }}
   {% endif %}
@@ -363,6 +367,9 @@
     "blocks": [
       {
         "type": "carousel-item"
+      },
+      {
+        "type": "@theme"
       }
     ],
     "presets": [

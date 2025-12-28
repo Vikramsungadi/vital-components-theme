@@ -1,0 +1,112 @@
+{% doc %}
+  @param {object} settings - section/block settings
+
+  @example
+  {%- capture padding_vars -%}
+    {%- render 'padding-vars', settings: block.settings -%}
+  {%- endcapture -%}
+
+  @description
+  - Creates css variables required to apply padding top, bottom.
+  - Add this padding_vars inside style atribute
+
+  Usage:
+  Add "padding" class to the element where vars are being used
+{% enddoc %}
+
+{%- capture style -%}
+--padding-top: {{ settings.padding_top | default: 0 }}px;
+--padding-top-mobile: {{ settings.padding_top_mobile | default: 0 }}px;
+--padding-right: {{ settings.padding_right | default: 0 }}px;
+--padding-right-mobile: {{ settings.padding_right_mobile | default: 0 }}px;
+--padding-bottom: {{ settings.padding_bottom | default: 0 }}px;
+--padding-bottom-mobile: {{ settings.padding_bottom_mobile | default: 0 }}px;
+--padding-left: {{ settings.padding_left | default: 0 }}px;
+--padding-left-mobile: {{ settings.padding_left_mobile | default: 0 }}px;
+{%- endcapture -%}
+
+{{- style -}}
+
+{% comment %} Add below scheme to the block/section setting wherever you are using and use above example snippet {% endcomment %}
+{% comment %}
+  {
+    "type": "range",
+    "id": "padding_top",
+    "label": "Padding Top",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_top_mobile",
+    "label": "Padding Top (Mobile)",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_right",
+    "label": "Padding Right",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_right_mobile",
+    "label": "Padding Right (Mobile)",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom",
+    "label": "Padding Bottom",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom_mobile",
+    "label": "Padding Bottom (Mobile)",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_left",
+    "label": "Padding Left",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "padding_left_mobile",
+    "label": "Padding Left (Mobile)",
+    "default": 0,
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px"
+  }
+{% endcomment %}

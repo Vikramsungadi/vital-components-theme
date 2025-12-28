@@ -2,19 +2,68 @@
   @param {product} product - Product object
 {% enddoc %}
 
+{% stylesheet %}
+  .product-card .main-image {
+    transition: opacity 0.5s ease;
+  }
+  .product-card .product-media-container:hover .main-image {
+    opacity: 0;
+    transition: opacity 0.25s 0.15s ease;
+  }
+{% endstylesheet %}
+
 <div class='product-card'>
-  {% render 'image', desktop_image: closest.product.featured_image, desktop_width: '500' %}
-  {% content_for 'block', id: 'product-card-title', type: 'text', closest.product: product %}
+  <a href='{{ product.url }}' class='product-media-container stack-container'>
+    {% if block.settings.show_seconday_image %}
+      {% render 'image',
+        desktop_image: closest.product.images[1],
+        desktop_width: '500',
+        mobile_width: '350',
+        class: 'secondary-image stack-item'
+      %}
+    {% endif %}
+
+    {% render 'image',
+      desktop_image: closest.product.featured_image,
+      desktop_width: '500',
+      mobile_width: '350',
+      class: 'main-image stack-item'
+    %}
+  </a>
+
+  {% assign price = product.selected_or_first_available_variant.price | money_with_currency %}
+
+  <a href='{{product.url}}' class='product-info'>
+    {% content_for 'block', id: 'product-card-title', type: 'text', closest.product: product %}
+    {% content_for 'block', id: 'product-card-price', type: 'text', closest.product: product, text: price %}
+  </a>
 </div>
 
 {% schema %}
   {
     "name": "Product Card",
     "blocks": [{ "type": "text" }],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_seconday_image",
+        "label": "Show Secondary image on hover"
+      }
+    ],
     "presets": [
       {
         "name": "Product Card",
-        "blocks": [{ "type": "text", "id": "product-card-title", "static": true, "settings": { "text": "{{closest.product.title}}" } }]
+        "settings": {
+          "show_seconday_image": true
+        },
+        "blocks": [
+          {
+            "type": "text",
+            "id": "product-card-title",
+            "static": true,
+            "settings": { "text": "{{ closest.product.title }}", "text_style": "text--normal", "text_style_mobile": "text--normal__mobile" }
+          }
+        ]
       }
     ]
   }

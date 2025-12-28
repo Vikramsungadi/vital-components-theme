@@ -1,11 +1,15 @@
-<div class="custom-section full-width">
+<div class='custom-section full-width'>
   {% if section.settings.background_image %}
-    <div class="custom-section__background">
+    <div class='custom-section__background'>
       {{ section.settings.background_image | image_url: width: 2000 | image_tag }}
     </div>
   {% endif %}
 
-  <div class="custom-section__content">
+  {%- capture padding_vars -%}
+    {%- render 'padding-vars', settings: section.settings -%}
+  {%- endcapture -%}
+
+  <div class='custom-section__content padding' style='{{padding_vars}}'>
     {% content_for 'blocks' %}
   </div>
 </div>
@@ -41,20 +45,100 @@
 {% endstylesheet %}
 
 {% schema %}
-{
-  "name": "t:general.custom_section",
-  "blocks": [{ "type": "@theme" }],
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "t:labels.background"
-    }
-  ],
-  "presets": [
-    {
-      "name": "t:general.custom_section"
-    }
-  ]
-}
+  {
+    "name": "t:general.custom_section",
+    "blocks": [{ "type": "@theme" }],
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "t:labels.background"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "label": "Padding Top (Mobile)",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_right",
+        "label": "Padding Right",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_right_mobile",
+        "label": "Padding Right (Mobile)",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "label": "Padding Bottom (Mobile)",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_left",
+        "label": "Padding Left",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_left_mobile",
+        "label": "Padding Left (Mobile)",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:general.custom_section"
+      }
+    ]
+  }
 {% endschema %}

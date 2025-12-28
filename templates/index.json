@@ -60,7 +60,11 @@
                     "font_size_mobile": 16,
                     "alignment": "center",
                     "alignment_mobile": "center",
-                    "color_scheme": ""
+                    "color_scheme": "",
+                    "padding_top": 0,
+                    "padding_top_mobile": 0,
+                    "padding_bottom": 0,
+                    "padding_bottom_mobile": 0
                   },
                   "blocks": {}
                 }
@@ -86,7 +90,11 @@
                     "font_size_mobile": 16,
                     "alignment": "center",
                     "alignment_mobile": "center",
-                    "color_scheme": ""
+                    "color_scheme": "",
+                    "padding_top": 0,
+                    "padding_top_mobile": 0,
+                    "padding_bottom": 0,
+                    "padding_bottom_mobile": 0
                   },
                   "blocks": {}
                 }
@@ -112,7 +120,11 @@
                     "font_size_mobile": 16,
                     "alignment": "center",
                     "alignment_mobile": "center",
-                    "color_scheme": ""
+                    "color_scheme": "",
+                    "padding_top": 0,
+                    "padding_top_mobile": 0,
+                    "padding_bottom": 0,
+                    "padding_bottom_mobile": 0
                   },
                   "blocks": {}
                 }
@@ -258,7 +270,11 @@
                 "font_size_mobile": 16,
                 "alignment": "center",
                 "alignment_mobile": "left",
-                "color_scheme": ""
+                "color_scheme": "",
+                "padding_top": 0,
+                "padding_top_mobile": 0,
+                "padding_bottom": 0,
+                "padding_bottom_mobile": 0
               },
               "blocks": {}
             },
@@ -499,7 +515,11 @@
                 "font_size_mobile": 16,
                 "alignment": "center",
                 "alignment_mobile": "left",
-                "color_scheme": ""
+                "color_scheme": "",
+                "padding_top": 0,
+                "padding_top_mobile": 0,
+                "padding_bottom": 0,
+                "padding_bottom_mobile": 0
               },
               "blocks": {}
             },
@@ -738,7 +758,7 @@
       "name": "t:general.custom_section",
       "settings": {}
     },
-    "product_list_tmB8hB": {
+    "product_list_dBPAEg": {
       "type": "product-list",
       "blocks": {
         "product-card": {
@@ -748,17 +768,22 @@
           "blocks": {
             "product-card-title": {
               "type": "text",
+              "name": "Product title",
               "static": true,
               "settings": {
-                "device": "common",
-                "text": "",
-                "text_style": "text--title",
-                "text_style_mobile": "text--title__mobile",
+                "device": "mobile",
+                "text": "{{ closest.product.title }}",
+                "text_style": "text--normal",
+                "text_style_mobile": "text--normal__mobile",
                 "font_size": 16,
                 "font_size_mobile": 16,
                 "alignment": "left",
                 "alignment_mobile": "left",
-                "color_scheme": ""
+                "color_scheme": "scheme-1",
+                "padding_top": 6,
+                "padding_top_mobile": 6,
+                "padding_bottom": 6,
+                "padding_bottom_mobile": 6
               },
               "blocks": {}
             }
@@ -775,7 +800,7 @@
           "type": "carousel",
           "static": true,
           "settings": {
-            "device": "desktop",
+            "device": "common",
             "desktop_aspect_ratio": "16/9",
             "mobile_aspect_ratio": "3/4",
             "slide_type": "slide",
@@ -783,7 +808,7 @@
             "autoplay_interval": 3,
             "enable_play_controls": false,
             "slide_per_page": 5,
-            "mobile_slide_per_page": 1,
+            "mobile_slide_per_page": 2,
             "arrows": true,
             "mobile_arrows": true,
             "arrows_background": "#00000021",
@@ -812,6 +837,6 @@
     "custom_section_XTD4p7",
     "custom_section_M8gD3i",
     "custom_section_yCDCNz",
-    "product_list_tmB8hB"
+    "product_list_dBPAEg"
   ]
 }

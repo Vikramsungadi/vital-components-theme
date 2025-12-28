@@ -9,6 +9,7 @@
   @param {string} [mobile_width]
   @param {string} [height]
   @param {link} [url]
+  @param {string} [loading]
 
   @example
   {% render 'image-block',
@@ -18,9 +19,12 @@
     mobile_image: section.settings.mobile_image,
     fit: 'cover',
     border_radius: '8',
-    custom_border_radius: 12
+    custom_border_radius: 12,
+    loading: "lazy"
   %}
 {% enddoc %}
+
+{% assign _loading = loading | default: 'auto' %}
 
 {% unless desktop_width or mobile_width %}
   {% if mobile_image %}
@@ -56,16 +60,19 @@
       {{ mobile_sources }}
       {{ desktop_sources }}
     {% endunless  %}
-    {% if desktop_width or mobile_width %}
+    {% if mobile_width and mobile_image %}
       <source media='(max-width: 768px)' srcset='{{ mobile_image | image_url: width: mobile_width | default:"500" }}'>
     {% endif %}
-      <img
+
+    {{ desktop_image | image_url: width: desktop_width | default: '2560' |  image_tag: alt: desktop_image.alt, 
+        width: desktop_width | default: '100%', 
+        height: height | default: '100%', class:"w-full h-full", loading: _loading   }}
+      {% comment %} <img
         src="{{ desktop_image | image_url: width: desktop_width | default: '2560' }}"
         alt="{{ desktop_image.alt | escape }}"
         width="{{ desktop_width | default: '100%' }}"
         height="{{ height | default: '100%' }}"
-        style="object-fit: {{ fit }};"
-        class="h-full w-full">
+        class="w-full h-full"> {% endcomment %}
     </picture>
   {% endcapture %}
 

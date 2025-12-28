@@ -1,68 +1,34 @@
 {% doc %}
   Renders a text block.
 
-  @example
+  @param {string} [text]
+
   {% content_for 'block', type: 'text', id: 'text' %}
 {% enddoc %}
 
-{% capture style %}
+{%- capture vars -%}
 --text-background: {{ block.settings.color_scheme.settings.background }};
 --text-color: {{ block.settings.color_scheme.settings.foreground }};
 --text-align: {{ block.settings.alignment }};
 --text-align-mobile: {{ block.settings.alignment_mobile }};
-
-{% if block.settings.text_style == 'custom' %}
-  --text-size: {{ block.settings.font_size }}px;
-{% endif %}
-{% if block.settings.text_style_mobile == 'custom' %}
-  --text-size-mobile: {{ block.settings.font_size_mobile }}px;
-{% endif %}
-
-{% endcapture %}
+{%- if block.settings.text_style == 'custom' -%}--text-size: {{ block.settings.font_size }}px;{%- endif -%}
+{%- if block.settings.text_style_mobile == 'custom' -%}--text-size-mobile: {{ block.settings.font_size_mobile }}px;{%- endif -%}
+{%- render 'padding-vars', settings: block.settings -%}
+{%- endcapture -%}
 
 <div
-  class='text {{ block.settings.text_style }} {{ block.settings.text_style_mobile }}'
-  style='{{ style }}'
-  {{ block.shopify_attributes }}>
-  {{ block.settings.text }}
+  class='text padding {{ block.settings.text_style }} {{ block.settings.text_style_mobile }}'
+  {{ block.shopify_attributes }}
+  style='{{ vars }}'>
+  {{ block.settings.text | default: text }}
 </div>
-
-{% stylesheet %}
-  .text {
-    text-align: var(--text-align);
-    background-color: var(--text-background);
-    color: var(--text-color);
-    font-size: var(--text-size);
-  }
-  .text--title {
-    font-size: 2rem;
-    font-weight: 700;
-  }
-  .text--subtitle {
-    font-size: 1.5rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    .text {
-      text-align: var(--text-align-mobile);
-      font-size: var(--text-size-mobile);
-    }
-    .text--title__mobile {
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-    .text--subtitle__mobile {
-      font-size: 1rem;
-    }
-  }
-{% endstylesheet %}
 
 {% schema %}
   {
     "name": "t:general.text",
     "settings": [
       {
-        "type": "radio",
+        "type": "select",
         "id": "device",
         "label": "Type",
         "default": "common",
@@ -73,11 +39,11 @@
           },
           {
             "value": "desktop",
-            "label": "Desktop"
+            "label": "Desk"
           },
           {
             "value": "mobile",
-            "label": "Mobile"
+            "label": "Mob"
           }
         ]
       },
@@ -153,6 +119,50 @@
         "id": "color_scheme",
         "default": "scheme_1",
         "label": "Color scheme"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "visible_if": "{{ block.settings.device == 'desktop' }}",
+        "label": "Padding Top",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "label": "Padding Top",
+        "visible_if": "{{ block.settings.device == 'mobile' }}",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "visible_if": "{{ block.settings.device == 'desktop' }}",
+        "label": "Padding Bottom",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "label": "Padding Bottom",
+        "visible_if": "{{ block.settings.device == 'mobile' }}",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px"
       }
     ],
     "presets": [{ "name": "t:general.text" }]
